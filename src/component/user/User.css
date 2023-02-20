@@ -1,5 +1,30 @@
+.user{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid red;
+}
 
+.header{
+   display:flex;
+   border: 1px solid blue;
+}
 
+.task{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.taskShow{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
 
 
 

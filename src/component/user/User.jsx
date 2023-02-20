@@ -5,6 +5,7 @@ import { Task } from '../task/Task'
 import { useDispatch, useSelector } from 'react-redux'
 import { addTask, deleteUser, logOutUser, unAuth, userLoad } from '../../Action/user'
 import { useState } from 'react'
+import "./User.css"
 
 export const User = () => {
 
@@ -76,8 +77,11 @@ export const User = () => {
             )
           }
         </div>
-        <Button onClick={logoutHandlar}>LogOut</Button>
+        <footer>
+        <Button type='submit' onClick={logoutHandlar}>LogOut</Button>
         <Button onClick={deleteAccountHandlar}>DeleteAccount</Button>
+        </footer>
+        
     </div>
   )
 }

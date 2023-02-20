@@ -1,0 +1,11 @@
+
+.Task{
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgb(178, 197, 214);
+    
+}
+
