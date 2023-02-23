@@ -3,36 +3,23 @@ import { Button, Typography } from "@mui/material"
 import { Link } from "react-router-dom";
 import { useState } from 'react'
 import { useDispatch} from 'react-redux';
-import {userAuth, userLoad } from '../../Action/user';
-import "./Login.css"
-import axios from 'axios';
-import { useCookies } from 'react-cookie';
+import {userAuth, userLoad, userLogin } from '../../Action/user';
+import "./Login.css";
 
 export const Login = () => {
 
   const [email, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [cookie,setCookie]=useCookies(['token']);
   const dispatch = useDispatch();
   const submitHandlar = async (e) => {
     e.preventDefault();
-    // dispatch(userLogin(email, password));
-
-    const {data}= await axios.post("https://todo-backend-66o7.onrender.com/api/login", { email, password });
-    setCookie('token',data.Token,{path:"/"});
-    console.log(cookie)
-    console.log(cookie)
+    await dispatch(userLogin(email, password));
     await dispatch( userLoad());
     dispatch(userAuth());
+    setName("");
+    setPassword("");
    
   }
-
- 
-
-  
-
-  
-  // console.log(document)
 
   return (
     <div>

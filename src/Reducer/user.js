@@ -47,6 +47,41 @@ export const userMethod = createReducer(
   {},
   {
 
+    // for login user
+    loginRequest: (state) => {
+      state.loading = true;
+
+    },
+
+    loginSuccess: (state, action) => {
+      state.loading = false;
+      state.user = action.playload;
+  
+    },
+
+    loginFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.playload;
+     
+    },
+
+
+  // for register new user
+  registerRequest: (state) => {
+    state.loading = true;
+  },
+
+  registerSuccess: (state, action) => {
+    state.loading = false;
+    state.message = action.playload;
+  },
+
+  registerFailure: (state, action) => {
+    state.loading = false;
+    state.message = action.playload;
+  },
+
+
     // add task
     addTaskRequest: (state) => {
       state.loading = true;
@@ -107,49 +142,5 @@ export const userMethod = createReducer(
       state.loading = false;
       state.message = action.playload;
     },
-  }
-);
-
-// for login and register
-
-export const userLog=createReducer(
-  {},
-  {
-    
-
-    // for login user
-    loginRequest: (state) => {
-      state.loading = true;
-
-    },
-
-    loginSuccess: (state, action) => {
-      state.loading = false;
-      state.user = action.playload;
-  
-    },
-
-    loginFailure: (state, action) => {
-      state.loading = false;
-      state.error = action.playload;
-     
-    },
-
-
-  // for register new user
-  registerRequest: (state) => {
-    state.loading = true;
-  },
-
-  registerSuccess: (state, action) => {
-    state.loading = false;
-    state.message = action.playload;
-  },
-
-  registerFailure: (state, action) => {
-    state.loading = false;
-    state.message = action.playload;
-  },
-
   }
 );

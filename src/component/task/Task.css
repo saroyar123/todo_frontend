@@ -1,11 +1,13 @@
 
 .Task{
     display: flex;
-    width: 50%;
+    width: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border: 2px solid rgb(178, 197, 214);
+    margin: 10px 0;
+    padding: 10px;
     
 }
 

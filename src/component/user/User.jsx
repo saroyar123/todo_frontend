@@ -21,6 +21,8 @@ export const User = () => {
     e.preventDefault();
     await dispatch(addTask(title,description));
     dispatch(userLoad());
+    setTitle("");
+    setDescription("");
   }
 
   const logoutHandlar=async(e)=>{
@@ -58,7 +60,7 @@ export const User = () => {
           <form className='task' onSubmit={submithandlar}>
             <input type="text" placeholder='title' value={title} onChange={(e)=>setTitle(e.target.value)}/>
             <textarea placeholder='description' value={description} onChange={(e)=>setDescription(e.target.value)}/>
-            <Button type='submit'>add</Button>
+            <Button type='submit'>Add</Button>
           </form>
         </div>
         <div className="taskShow">
@@ -73,7 +75,7 @@ export const User = () => {
                 />  
               ))
             ):(
-              <h2>you have to task to do</h2>
+              <h2>Add some task</h2>
             )
           }
         </div>

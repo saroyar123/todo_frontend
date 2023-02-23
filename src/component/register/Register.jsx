@@ -18,6 +18,9 @@ function Register() {
     await dispatch(userRegister(name, email, password));
     await dispatch(userLoad());
     dispatch(userAuth())
+    setEmail("");
+    setName("");
+    setPassword("");
 
 
   }

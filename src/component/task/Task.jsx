@@ -14,7 +14,7 @@ export const Task = ({title,description,id}) => {
   }
 return (
     <div className='Task'>
-      <h3>{title}</h3>
+      <h2>{title}</h2>
       <h3>{description}</h3>
       <Button onClick={deleteHandlar}>delete</Button>
     </div>

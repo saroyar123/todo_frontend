@@ -1,6 +1,4 @@
 import axios from "axios";
-// const b_endUrl="https://todo-backend-66o7.onrender.com"
-// const b_endUrl="http://localhost:4000";
 
 export const userLogin = (email, password) => async (dispatch) => {
   console.log("Runned")
@@ -10,9 +8,7 @@ export const userLogin = (email, password) => async (dispatch) => {
     });
   
     const {data}= await axios.post("/api/login", { email, password });
-    console.log(data)
-
-    console.log(data);
+    // console.log(data)
     dispatch({
       type: "loginSuccess",
       playload: data,
@@ -32,7 +28,7 @@ export const userLoad = () => async (dispatch) => {
       type: "loadUserRequest",
     });
 
-    const { data } = await axios.get("https://todo-backend-66o7.onrender.com/api/getUserdata");
+    const { data } = await axios.get("/api/getUserdata");
     // console.log(data)
 
     dispatch({
@@ -76,8 +72,10 @@ export const userRegister=(name,email,password)=>async(dispatch)=>{
       type:"registerRequest"
     })
 
+    // console.log(name,email,password);
+    
     const {data}=await axios.post("/api/register",{name,email,password});
-
+    
     dispatch({
       type:"registerSuccess",
       playload:data
@@ -147,7 +145,8 @@ export const deleteTask=(id)=>async(dispatch)=>{
     dispatch({
       type:"deleteTaskRequest"
     })
-    const {data}=await axios.delete(`/deleteTask/${id}`)
+    // console.log(id);
+    const {data}=await axios.delete(`/api/deleteTask/${id}`)
     
 
     dispatch({
