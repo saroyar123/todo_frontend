@@ -19,16 +19,24 @@ export const User = () => {
   
   const submithandlar=async(e)=>{
     e.preventDefault();
-    await dispatch(addTask(title,description));
-    dispatch(userLoad());
+    const token=localStorage.getItem("token");
+    console.log(token);
+    
+    await dispatch(addTask(title,description,token));
+    dispatch(userLoad(token));
     setTitle("");
     setDescription("");
   }
 
   const logoutHandlar=async(e)=>{
     // e.preventDefault();
-    await dispatch(logOutUser());
-    await  dispatch(userLoad());
+
+    let token=localStorage.getItem("token");
+    console.log(token);
+    localStorage.removeItem("token");
+    token=null;
+    await dispatch(logOutUser(token));
+    await  dispatch(userLoad(token));
     dispatch(unAuth());
    
     
@@ -36,9 +44,13 @@ export const User = () => {
 
   const deleteAccountHandlar=async(e)=>{
     e.preventDefault();
-    await dispatch(deleteUser());
-    await dispatch(userLoad());
-    dispatch(unAuth());
+
+    const token=localStorage.getItem("token");
+    console.log(token);
+    localStorage.removeItem("token");
+    await dispatch(deleteUser(token));
+    await dispatch(userLoad(token));
+    dispatch(unAuth(token));
     
     
 

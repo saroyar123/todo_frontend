@@ -1,8 +1,9 @@
 import { Button} from '@mui/material';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { userLoad, userRegister, userAuth } from '../../Action/user';
+import { userLoad, userAuth } from '../../Action/user';
 import { Link } from "react-router-dom";
+import axios from 'axios'
 import "./Register.css"
 
 function Register() {
@@ -15,9 +16,11 @@ function Register() {
 
   const submitHandel = async (e) => {
     e.preventDefault();
-    await dispatch(userRegister(name, email, password));
-    await dispatch(userLoad());
-    dispatch(userAuth())
+    const {data}=await axios.post("https://todo-backend-66o7.onrender.com/api/register",{name,email,password});
+    console.log(data)
+    localStorage.setItem("token",data.token);
+    await dispatch(userLoad(data.token));
+    dispatch(userAuth(data.token))
     setEmail("");
     setName("");
     setPassword("");

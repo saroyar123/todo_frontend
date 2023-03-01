@@ -7,12 +7,13 @@ export const userLogin = (email, password) => async (dispatch) => {
       type: "loginRequest",
     });
   
-    const {data}= await axios.post("/api/login", { email, password });
+    const {data}= await axios.post("https://todo-backend-66o7.onrender.com/api/login", { email, password });
     // console.log(data)
     dispatch({
       type: "loginSuccess",
       playload: data,
     });
+
   } catch (error) {
     dispatch({
       type: "loginFailure",
@@ -22,14 +23,14 @@ export const userLogin = (email, password) => async (dispatch) => {
 };
 
 // for load user
-export const userLoad = () => async (dispatch) => {
+export const userLoad = (token) => async (dispatch) => {
   try {
     dispatch({
       type: "loadUserRequest",
     });
-
-    const { data } = await axios.get("/api/getUserdata");
-    // console.log(data)
+    // console.log(token);
+    const { data } = await axios.get(`https://todo-backend-66o7.onrender.com/api/getUserdata/${token}`);
+    console.log(data)
 
     dispatch({
       type: "loadUserSuccess",
@@ -44,13 +45,13 @@ export const userLoad = () => async (dispatch) => {
 };
 
 // for checking auth
-export const userAuth = () => async (dispatch) => {
+export const userAuth = (token) => async (dispatch) => {
   try {
     dispatch({
       type: "authRequest",
     });
 
-     await axios.get("/api/getUserdata");
+     await axios.get(`https://todo-backend-66o7.onrender.com/api/getUserdata/${token}`);
 
     dispatch({
       type: "authSuccess",
@@ -74,7 +75,7 @@ export const userRegister=(name,email,password)=>async(dispatch)=>{
 
     // console.log(name,email,password);
     
-    const {data}=await axios.post("/api/register",{name,email,password});
+    const {data}=await axios.post("https://todo-backend-66o7.onrender.com/api/register",{name,email,password});
     
     dispatch({
       type:"registerSuccess",
@@ -91,13 +92,13 @@ export const userRegister=(name,email,password)=>async(dispatch)=>{
 
 // add task of the login user
 
-export const addTask=(title,description)=>async(dispatch)=>{
+export const addTask=(title,description,token)=>async(dispatch)=>{
   try {
     dispatch({
       type:"addTaskRequest"
     })
 
-    const {data}=await axios.post("/api/addTask",{title,description});
+    const {data}=await axios.post(`https://todo-backend-66o7.onrender.com/api/addTask/${token}`,{title,description});
 
     dispatch({
       type:"addTaskSuccess",
@@ -115,13 +116,13 @@ export const addTask=(title,description)=>async(dispatch)=>{
 
 // log out user
 
-export const logOutUser=()=>async(dispatch)=>{
+export const logOutUser=(token)=>async(dispatch)=>{
   try {
     dispatch({
       type:"logOutRequest"
     })
     console.log("logout user call");
-    const {data}=await axios.get("/api/logout")
+    const {data}=await axios.get(`https://todo-backend-66o7.onrender.com/api/logout/${token}`)
     
 
     dispatch({
@@ -140,13 +141,13 @@ export const logOutUser=()=>async(dispatch)=>{
 
 // delete task of user
 
-export const deleteTask=(id)=>async(dispatch)=>{
+export const deleteTask=(id,token)=>async(dispatch)=>{
   try {
     dispatch({
       type:"deleteTaskRequest"
     })
     // console.log(id);
-    const {data}=await axios.delete(`/api/deleteTask/${id}`)
+    const {data}=await axios.delete(`https://todo-backend-66o7.onrender.com/api/deleteTask/${id}/${token}`)
     
 
     dispatch({
@@ -165,12 +166,12 @@ export const deleteTask=(id)=>async(dispatch)=>{
 
 // delete user
 
-export const deleteUser=(id)=>async(dispatch)=>{
+export const deleteUser=(token)=>async(dispatch)=>{
   try {
     dispatch({
       type:"deleteUserRequest"
     })
-    const {data}=await axios.delete("/api/deleteAccount")
+    const {data}=await axios.delete(`https://todo-backend-66o7.onrender.com/api/deleteAccount/${token}`)
     
 
     dispatch({

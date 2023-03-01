@@ -3,8 +3,9 @@ import { Button, Typography } from "@mui/material"
 import { Link } from "react-router-dom";
 import { useState } from 'react'
 import { useDispatch} from 'react-redux';
-import {userAuth, userLoad, userLogin } from '../../Action/user';
+import {userAuth, userLoad} from '../../Action/user';
 import "./Login.css";
+import axios from 'axios';
 
 export const Login = () => {
 
@@ -13,9 +14,13 @@ export const Login = () => {
   const dispatch = useDispatch();
   const submitHandlar = async (e) => {
     e.preventDefault();
-    await dispatch(userLogin(email, password));
-    await dispatch( userLoad());
-    dispatch(userAuth());
+    const {data}=await axios.post("https://todo-backend-66o7.onrender.com/api/login", { email, password });
+    console.log(data.token);
+    localStorage.setItem("token",data.token);
+
+
+    await dispatch( userLoad(data.token));
+    dispatch(userAuth(data.token));
     setName("");
     setPassword("");
    

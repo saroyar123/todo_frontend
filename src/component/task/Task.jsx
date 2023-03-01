@@ -8,9 +8,11 @@ export const Task = ({title,description,id}) => {
   const dispatch=useDispatch();
 
   const deleteHandlar=async(e)=>{
+    const token=localStorage.getItem("token");
+    console.log(token);
        e.preventDefault();
-       await dispatch(deleteTask(id));
-       dispatch(userLoad());
+       await dispatch(deleteTask(id,token));
+       dispatch(userLoad(token));
   }
 return (
     <div className='Task'>
